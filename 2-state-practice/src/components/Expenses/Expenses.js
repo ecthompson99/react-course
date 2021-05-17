@@ -18,8 +18,8 @@ const Expenses = (props) => {
 
   return (
     <div>
-      <ExpensesFilter onSelectYear={selectYearHandler} />
       <Card className="expenses">
+        <ExpensesFilter onSelectYear={selectYearHandler} />
         <ExpenseItem
           title={props.items[0].title}
           amount={props.items[0].amount}
