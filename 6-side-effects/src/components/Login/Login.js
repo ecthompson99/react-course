@@ -1,8 +1,9 @@
-import React, { useEffect, useState, useReducer } from 'react';
+import React, { useEffect, useState, useReducer, useContext } from 'react';
 
 import Card from '../UI/Card/Card';
 import classes from './Login.module.css';
 import Button from '../UI/Button/Button';
+import AuthContext from '../AuthContext/auth-context';
 
 const emailReducer = (prevState, action) => {
   if (action.type === 'USER_INPUT') {
@@ -24,8 +25,8 @@ const passwordReducer = (prevState, action) => {
   return initialPasswordState;
 }
 
-const initialEmailState = { value: '', isValid: false };
-const initialPasswordState = { value: '', isValid: false };
+const initialEmailState = { value: '', isValid: null };
+const initialPasswordState = { value: '', isValid: null };
 
 const Login = (props) => {
   const [formIsValid, setFormIsValid] = useState(false);
@@ -33,11 +34,13 @@ const Login = (props) => {
   const [emailState, dispatchEmail] = useReducer(emailReducer, initialEmailState);
   const [passwordState, dispatchPassword] = useReducer(passwordReducer, initialPasswordState);
 
+  const authCtx = useContext(AuthContext);
+
   useEffect(() => {
     const timerId = setTimeout(() => {
       console.log('running validation!')
       setFormIsValid(
-        emailState.value.includes('@') && passwordState.value.trim().length > 6
+        emailState.isValid && passwordState.isValid
       );
     }, 500); // debounce for 500 milliseconds.
 
@@ -66,7 +69,7 @@ const Login = (props) => {
 
   const submitHandler = (event) => {
     event.preventDefault();
-    props.onLogin(emailState.value, passwordState.value);
+    authCtx.onLogin(emailState.value, passwordState.value);
   };
 
   return (
