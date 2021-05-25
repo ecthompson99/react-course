@@ -1,0 +1,35 @@
+.list-item__container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: white;
+  border-bottom: 1px #eee solid;
+  padding: 7px 0;
+}
+
+.list-item__details * {
+  margin: 7px;
+}
+
+.list-item__details h4 {
+  font-style: italic;
+  font-weight: 500;
+  font-size: 0.8rem;
+}
+
+.list-item__details h3 {
+  color: #a5622e;
+}
+
+.list-item__metadata {
+  font-weight: 700;
+}
+
+.list-item__metadata input {
+  margin: 5px 5px;
+  width: 2rem;
+}
+
+.list-item__metadata label {
+  margin: 10px;
+}
